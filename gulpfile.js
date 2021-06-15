@@ -236,10 +236,13 @@ const scriptsBuild = () => {
 
 exports.build = series(clean, parallel( htmlInclude, scriptsBuild, fonts, imgToApp, tinypng, svgSprites, resource), fontsStyle, stylesBuild, watchFiles)
 
-
+// deploy to Github
 const deploy = () => {
     return src('./app/**/*')
             .pipe(ghPages({
-                origin: ''
+                remoteUrl: 'https://github.com/DRyzhkovProd/Gulp.git',
+                branch: 'build'
             }))
 }
+
+exports.deploy = deploy
